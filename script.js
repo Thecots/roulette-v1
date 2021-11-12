@@ -1,5 +1,5 @@
 const roulette = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26];
-
+const money = 20;
 
 newRoulette = [];
 const init = async() =>{
@@ -24,8 +24,9 @@ const animation = (n,c) => {
     document.querySelector('.roulette').insertAdjacentHTML('afterbegin',`<div class="new" style="background:${c};">${n}</div>`);
 }
 
-const spin = (e,i) => {
-     let ts = 0;
+let time = 0;
+const spin = async (e,i,t) => {
+    if(t){time = 10}
     setTimeout(async function(){
         let l = e[e.length-1]
         e.pop();
@@ -35,9 +36,9 @@ const spin = (e,i) => {
             animation(l.n,l.c)
             spin(e,(i-1));
         }    
-
-        console.log(ts);
-    },parseInt(10));
+        time += 10;
+        console.log(e)
+    },parseInt(time));
     if(i == 0){
         Swal.fire(document.querySelector('.roulette').children[13].innerText);
         console.log(document.querySelector('.roulette').children[13].innerText);
